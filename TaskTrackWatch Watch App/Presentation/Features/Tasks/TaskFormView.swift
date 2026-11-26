@@ -19,7 +19,7 @@ struct TaskFormView: View {
                 }
             }
 
-            DatePicker("Due date", selection: $viewModel.dueDate, displayedComponents: .date)
+            DatePicker("Due date", selection: $viewModel.dueDate, displayedComponents: [.date, .hourAndMinute])
 
             Toggle(isOn: $viewModel.isAssigned) {
                 VStack(alignment: .leading) {

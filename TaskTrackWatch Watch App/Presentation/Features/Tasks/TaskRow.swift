@@ -23,7 +23,7 @@ struct TaskRow: View {
     }
 
     private var subtitle: String {
-        let date = task.dueDate.formatted(.dateTime.day().month(.abbreviated))
+        let date = task.dueDate.formatted(.dateTime.day().month(.abbreviated).hour().minute())
         guard let project else { return date }
         return "\(date) · \(project.name)"
     }
