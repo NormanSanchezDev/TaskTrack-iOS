@@ -20,6 +20,7 @@ extension AppDependencies {
             id: UUID(),
             name: EnsureDefaultProjectUseCase.defaultName,
             colorHex: ProjectColor.all[0],
+            emoji: ProjectEmoji.all[0],
             isDefault: true,
             createdAt: .now
         )
@@ -27,6 +28,7 @@ extension AppDependencies {
             id: UUID(),
             name: "Personal",
             colorHex: ProjectColor.all[2],
+            emoji: ProjectEmoji.all[2],
             isDefault: false,
             createdAt: .now
         )

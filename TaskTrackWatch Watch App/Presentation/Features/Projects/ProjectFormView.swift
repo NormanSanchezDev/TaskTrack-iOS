@@ -23,6 +23,13 @@ struct ProjectFormView: View {
                 }
             }
 
+            Picker("Emoji", selection: $viewModel.emoji) {
+                ForEach(ProjectEmoji.all, id: \.self) { emoji in
+                    Text(emoji)
+                        .tag(emoji)
+                }
+            }
+
             Section {
                 TTButton(
                     model: .init(

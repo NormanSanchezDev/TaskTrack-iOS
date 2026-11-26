@@ -9,4 +9,6 @@ enum AppRoute: Hashable {
     case projectList
     case projectDetail(projectID: UUID)
     case projectForm(projectID: UUID?)
+    case pomodoro
+    case settings
 }

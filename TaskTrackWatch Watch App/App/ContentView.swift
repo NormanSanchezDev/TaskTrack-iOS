@@ -30,6 +30,10 @@ struct ContentView: View {
             ProjectDetailView(viewModel: factory.makeProjectDetailViewModel(projectID: projectID))
         case .projectForm(let projectID):
             ProjectFormView(viewModel: factory.makeProjectFormViewModel(projectID: projectID))
+        case .pomodoro:
+            ComingSoonView(title: HomeDestination.pomodoro.title, systemImage: HomeDestination.pomodoro.systemImage)
+        case .settings:
+            ComingSoonView(title: HomeDestination.settings.title, systemImage: HomeDestination.settings.systemImage)
         }
     }
 }

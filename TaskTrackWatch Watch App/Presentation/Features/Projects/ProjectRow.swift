@@ -8,9 +8,8 @@ struct ProjectRow: View {
 
     var body: some View {
         HStack(spacing: 8) {
-            Circle()
-                .fill(Color(hex: summary.project.colorHex))
-                .frame(width: 10, height: 10)
+            Text(summary.project.emoji)
+                .font(.title3)
                 .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 2) {

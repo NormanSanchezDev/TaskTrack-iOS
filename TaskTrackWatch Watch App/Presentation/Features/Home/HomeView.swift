@@ -3,6 +3,11 @@ import SwiftUI
 struct HomeView: View {
     @Environment(AppRouter.self) private var router
 
+    private let columns = [
+        GridItem(.flexible(), spacing: 8),
+        GridItem(.flexible(), spacing: 8)
+    ]
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 8) {
@@ -14,23 +19,13 @@ struct HomeView: View {
                     )
                 )
 
-                TTButton(
-                    model: .init(text: "Add task", trailingIcon: "plus", type: .filled) {
-                        router.push(.taskForm(taskID: nil, projectID: nil))
+                LazyVGrid(columns: columns, spacing: 8) {
+                    ForEach(HomeDestination.allCases) { destination in
+                        HomeTile(destination: destination) {
+                            router.push(destination.route)
+                        }
                     }
-                )
-
-                TTButton(
-                    model: .init(text: "My tasks", trailingIcon: "list.bullet", type: .outlined) {
-                        router.push(.taskList)
-                    }
-                )
-
-                TTButton(
-                    model: .init(text: "Projects", trailingIcon: "folder", type: .outlined) {
-                        router.push(.projectList)
-                    }
-                )
+                }
             }
         }
         .navigationTitle("TaskTrack")

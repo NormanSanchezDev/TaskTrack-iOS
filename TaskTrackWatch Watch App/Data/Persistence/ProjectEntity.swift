@@ -9,16 +9,18 @@ final class ProjectEntity {
     @Attribute(.unique) var id: UUID
     var name: String
     var colorHex: String
+    var emoji: String = ProjectEmoji.defaultValue
     var isDefault: Bool
     var createdAt: Date
 
     @Relationship(deleteRule: .cascade, inverse: \TaskEntity.project)
     var tasks: [TaskEntity] = []
 
-    init(id: UUID, name: String, colorHex: String, isDefault: Bool, createdAt: Date) {
+    init(id: UUID, name: String, colorHex: String, emoji: String, isDefault: Bool, createdAt: Date) {
         self.id = id
         self.name = name
         self.colorHex = colorHex
+        self.emoji = emoji
         self.isDefault = isDefault
         self.createdAt = createdAt
     }

@@ -7,6 +7,7 @@ import Foundation
 final class ProjectFormViewModel {
     var name = ""
     var colorHex = ProjectColor.all[0]
+    var emoji = ProjectEmoji.defaultValue
     var isShowingError = false
     private(set) var isSaving = false
     private(set) var errorMessage = ""
@@ -42,6 +43,7 @@ final class ProjectFormViewModel {
             existing = project
             name = project.name
             colorHex = project.colorHex
+            emoji = project.emoji
         } catch {
             present(error)
         }
@@ -54,6 +56,7 @@ final class ProjectFormViewModel {
             id: existing?.id ?? UUID(),
             name: name,
             colorHex: colorHex,
+            emoji: emoji,
             isDefault: existing?.isDefault ?? false,
             createdAt: existing?.createdAt ?? .now
         )

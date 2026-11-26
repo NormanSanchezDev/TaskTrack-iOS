@@ -9,6 +9,7 @@ enum ProjectMapper {
             id: entity.id,
             name: entity.name,
             colorHex: entity.colorHex,
+            emoji: entity.emoji,
             isDefault: entity.isDefault,
             createdAt: entity.createdAt
         )
@@ -19,6 +20,7 @@ enum ProjectMapper {
             id: project.id,
             name: project.name,
             colorHex: project.colorHex,
+            emoji: project.emoji,
             isDefault: project.isDefault,
             createdAt: project.createdAt
         )
@@ -27,5 +29,6 @@ enum ProjectMapper {
     static func apply(_ project: Project, to entity: ProjectEntity) {
         entity.name = project.name
         entity.colorHex = project.colorHex
+        entity.emoji = project.emoji
     }
 }
