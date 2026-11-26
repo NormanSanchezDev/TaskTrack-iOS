@@ -1,25 +1,27 @@
-//
-//  ContentView.swift
-//  TaskTrackWatch Watch App
-//
-//  Created by Norman Sánchez on 25/11/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @State private var router = AppRouter()
+    @Environment(\.ttTheme) private var theme
+    @Environment(\.colorScheme) private var colorScheme
+
     var body: some View {
-        VStack {
-            Text("Welcome to TaskTracking")
-            Text("Could you add some task that you are working now?")
-            
-            Button(action: {
-                
-            }, label: {
-                Text("Add task")
-            })
+        NavigationStack(path: $router.path) {
+            HomeView()
+                .navigationDestination(for: AppRoute.self, destination: destination)
         }
-        .padding()
+        .containerBackground(theme.palette(for: colorScheme).primary.gradient, for: .navigation)
+        .environment(router)
+    }
+
+    @ViewBuilder
+    private func destination(for route: AppRoute) -> some View {
+        switch route {
+        case .taskList:
+            TaskListView()
+        case .addTask:
+            AddTaskView()
+        }
     }
 }
 
