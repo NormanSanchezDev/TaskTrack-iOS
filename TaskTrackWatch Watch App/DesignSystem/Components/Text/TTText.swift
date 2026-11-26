@@ -10,10 +10,12 @@ public enum TTTextType {
 public struct TTTextModel {
     public var text: String
     public var type: TTTextType
+    public var alignment: TextAlignment
 
-    public init(text: String, type: TTTextType) {
+    public init(text: String, type: TTTextType, alignment: TextAlignment = .leading) {
         self.text = text
         self.type = type
+        self.alignment = alignment
     }
 }
 
@@ -34,7 +36,7 @@ public struct TTText: View {
             .font(style.font)
             .fontWeight(style.weight)
             .foregroundStyle(color)
-            .multilineTextAlignment(.center)
+            .multilineTextAlignment(model.alignment)
             .minimumScaleFactor(0.8)
             .fixedSize(horizontal: false, vertical: true)
     }
@@ -66,10 +68,10 @@ private struct TTTextPreview: View {
 
     var body: some View {
         VStack(spacing: 6) {
-            TTText(model: .init(text: "Title", type: .title))
-            TTText(model: .init(text: "Description", type: .description))
-            TTText(model: .init(text: "Body", type: .body))
-            TTText(model: .init(text: "Caption", type: .caption))
+            TTText(model: .init(text: "Title", type: .title, alignment: .leading))
+            TTText(model: .init(text: "Description", type: .description, alignment: .leading))
+            TTText(model: .init(text: "Body", type: .body, alignment: .leading))
+            TTText(model: .init(text: "Caption", type: .caption, alignment: .leading))
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(theme.palette(for: colorScheme).background)

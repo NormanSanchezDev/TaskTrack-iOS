@@ -37,24 +37,8 @@ public struct TTButton: View {
     }
 
     public var body: some View {
-        let palette = theme.palette(for: colorScheme)
-        let button = Button(action: model.action) { label }
-
-        switch model.type {
-        case .filled:
-            button
-                .buttonStyle(.glassProminent)
-                .tint(palette.primary)
-                .foregroundStyle(palette.onPrimary)
-        case .outlined:
-            button
-                .buttonStyle(TTOutlinedButtonStyle(color: palette.primary))
-        case .text:
-            button
-                .buttonStyle(.plain)
-                .foregroundStyle(palette.primary)
-                .frame(minHeight: TTButtonMetrics.minHeight)
-        }
+        Button(action: model.action) { label }
+            .buttonStyle(TTButtonStyle(type: model.type, palette: theme.palette(for: colorScheme)))
     }
 
     private var label: some View {
@@ -64,42 +48,11 @@ public struct TTButton: View {
             if let trailingIcon = model.trailingIcon {
                 Image(systemName: trailingIcon)
                     .fontWeight(.bold)
+                    .accessibilityHidden(true)
             }
         }
         .lineLimit(1)
         .minimumScaleFactor(0.8)
-        .frame(maxWidth: .infinity)
-    }
-}
-
-private enum TTButtonMetrics {
-    static let minHeight: CGFloat = 44
-    static let borderWidth: CGFloat = 2
-}
-
-/**
- * Outlined capsule. Uses `strokeBorder` so the line is drawn inside
- * the bounds and never gets clipped by the screen or container edges.
- */
-private struct TTOutlinedButtonStyle: ButtonStyle {
-    let color: Color
-
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundStyle(color)
-            .padding(.horizontal, 12)
-            .frame(maxWidth: .infinity, minHeight: TTButtonMetrics.minHeight)
-            .background {
-                Capsule()
-                    .fill(color.opacity(configuration.isPressed ? 0.25 : 0.001))
-            }
-            .overlay {
-                Capsule()
-                    .strokeBorder(color, lineWidth: TTButtonMetrics.borderWidth)
-            }
-            .contentShape(Capsule())
-            .scaleEffect(configuration.isPressed ? 0.96 : 1)
-            .animation(.snappy(duration: 0.15), value: configuration.isPressed)
     }
 }
 
@@ -122,6 +75,8 @@ private struct TTButtonPreview: View {
             TTButton(model: .init(text: "Filled", trailingIcon: "plus", type: .filled) {})
             TTButton(model: .init(text: "Outlined", trailingIcon: "list.bullet", type: .outlined) {})
             TTButton(model: .init(text: "Text", type: .text) {})
+            TTButton(model: .init(text: "Disabled", type: .filled) {})
+                .disabled(true)
         }
         .padding(.horizontal, 8)
         .frame(maxWidth: .infinity, maxHeight: .infinity)

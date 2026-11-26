@@ -1,14 +1,6 @@
 import SwiftUI
 
 /**
- * Destinations reachable from the root `NavigationStack`.
- */
-enum AppRoute: Hashable {
-    case taskList
-    case addTask
-}
-
-/**
  * Owns the navigation path. Injected with `.environment(router)`
  * and read in screens with `@Environment(AppRouter.self)`.
  */

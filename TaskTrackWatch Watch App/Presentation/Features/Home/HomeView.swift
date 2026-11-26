@@ -5,24 +5,33 @@ struct HomeView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 8) {
-                TTText(model: .init(text: "Welcome\nagain!", type: .title))
-                TTText(model: .init(text: "Start to track\nyour tasks", type: .description))
+            VStack(alignment: .leading, spacing: 8) {
+                TTText(
+                    model: .init(
+                        text: "Start to track\nyour tasks",
+                        type: .description,
+                        alignment: .leading
+                    )
+                )
 
                 TTButton(
                     model: .init(text: "Add task", trailingIcon: "plus", type: .filled) {
-                        router.push(.addTask)
+                        router.push(.taskForm(taskID: nil, projectID: nil))
                     }
                 )
-                .padding(.top, 4)
 
                 TTButton(
                     model: .init(text: "My tasks", trailingIcon: "list.bullet", type: .outlined) {
                         router.push(.taskList)
                     }
                 )
+
+                TTButton(
+                    model: .init(text: "Projects", trailingIcon: "folder", type: .outlined) {
+                        router.push(.projectList)
+                    }
+                )
             }
-            .padding(.horizontal, 4)
         }
         .navigationTitle("TaskTrack")
     }
